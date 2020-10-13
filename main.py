@@ -26,6 +26,7 @@ start = True
 startag = False
 while(start):
     (RED, GREEN, BLUE) = colorSensorV.rgb()
+    (RED1, GREEN1, BLUE1 ) = colorSensorH.rgb()
     RED -=5
     GREEN -=5
     BLUE -=20
@@ -39,7 +40,7 @@ while(start):
             (red, green, blue) = colorSensorV.rgb()
             is_black = red < RED or green < GREEN or blue < BLUE
             (red1, green1, blue1) = colorSensorH.rgb()
-            is_black2 = red1 < RED or green1 < GREEN or blue1 < BLUE
+            is_black2 = red1 < RED1 or green1 < GREEN1 or blue1 < BLUE1
             print(colorSensorV.rgb())
             print(colorSensorH.rgb())
             robot.drive(150,0)
