@@ -17,48 +17,27 @@ us = UltrasonicSensor(port=Port.S1)
 colorSensorV = ColorSensor(port=Port.S2)
 colorSensorH = ColorSensor(port=Port.S3)
 touch = TouchSensor(port=Port.S4)
-#RED = 20
-#GREEN = 20
-#BLUE = 30
+RED = 10
+GREEN = 10
+BLUE = 20
 robot = DriveBase(A, B, wheel_diameter=56, axle_track=130)
-arr = []
 start = True
 startag = False
 while(start):
-    (RED, GREEN, BLUE) = colorSensorV.rgb()
-    (RED1, GREEN1, BLUE1 ) = colorSensorH.rgb()
-    RED -=5
-    GREEN -=5
-    BLUE -=20
-    t_1 = 0
-    t_2 = 0
-    print(str(RED) + " " + str(GREEN) + " " + str(BLUE))
     if(touch.pressed()):
         startag = True
     while(startag):
-        if us.distance() > 100:
-            (red, green, blue) = colorSensorV.rgb()
-            is_black = red < RED or green < GREEN or blue < BLUE
-            (red1, green1, blue1) = colorSensorH.rgb()
-            is_black2 = red1 < RED1 or green1 < GREEN1 or blue1 < BLUE1
-            print(colorSensorV.rgb())
-            print(colorSensorH.rgb())
-            robot.drive(150,0)
-            if(is_black):
-                robot.drive(25,70)
-                if(time.time()-t_2 < 0.5):
-                    robot.stop()
-                    robot.turn(25)
-                    robot.straight(100)
-                t_1 = time.time()
-            elif(is_black2):
-                robot.drive(25,-70)
-                if(time.time()-t_1 < 0.5):
-                    robot.stop()
-                    robot.turn(-25)
-                    robot.straight(100)
-                t_2 = time.time()
-            t_1 = 0 
-            t_2 = 0
+        print(colorSensorH.rgb())
+        print(colorSensorV.rgb())
+        (red, green, blue) = colorSensorV.rgb()
+        is_black = red < RED or green < GREEN or blue < BLUE
+        (red1, green1, blue1) = colorSensorH.rgb()
+        is_black2 = red1 < RED or green1 < GREEN or blue1 < BLUE
+        if not (is_black or is_black2):
+            robot.drive(200,0)
+        elif(is_black):
+            robot.drive(120,90)
+        elif(is_black2):
+            robot.drive(120,-90)
         else:
             robot.stop()
