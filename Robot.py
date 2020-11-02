@@ -27,27 +27,23 @@ class Robot:
         self.motor_2.run(speed=speed_m2)
 
 
-    def first_program(self,input_time):
+    def case_1(self,input_time):
         n_time = time.time()
         while(time.time()-n_time <= input_time):
             obj.rotateMotors(200,0)
             obj.rotatePlate(200)
+        return True
 
-    def second_program(self,input_time):
-    def third_program(self,input_time):
-    def fourth_program(self,input_time):
-    def fifth_program(self,input_time):
+    def case_2(self,input_time):
+    def case_3(self,input_time):
+    def case_4(self,input_time):
+    def case_5(self,input_time):
+      
 
-    def switch(self,i):
-        switcher = {
-            0:first_program,
-            1:second_program,
-            2:third_program,
-            3:fourth_program,
-            4:fifth_program
-        }
-        func = switcher.get(i, lambda:"invalid")
-        obj.func()
+    def switch(self, i):
+        default = "Program doesnt exist"
+        return getattr(self, 'case_' + str(i), lambda: default)()
+    
 
     def main(self):
         nr = 0
