@@ -10,7 +10,7 @@ import time
 
 class Robot:
     # Konstruktør
-    def init(self):
+    def __init__(self):
         self.motor_plate = Motor(port=Port.C)
         self.motor_1 = Motor(port=Port.B)
         self.motor_2 = Motor(port=Port.A)
@@ -26,18 +26,72 @@ class Robot:
         self.motor_1.run(speed=speed_m1)
         self.motor_2.run(speed=speed_m2)
 
+    def stopMotors(self):
+        self.motor_1.stop()
+        self.motor_2.stop()
+        self.motor_plate.stop()
 
-    def case_1(self,input_time):
+#Maiken
+    def case_1(self):
         n_time = time.time()
-        while(time.time()-n_time <= input_time):
-            obj.rotateMotors(200,0)
-            obj.rotatePlate(200)
+        time_limit = 20
+        while(time.time()-n_time <= time_limit):
+            obj.rotateMotors(200,400)
+            obj.rotatePlate(60)
+        obj.stopMotors()    
         return True
 
-    def case_2(self,input_time):
-    def case_3(self,input_time):
-    def case_4(self,input_time):
-    def case_5(self,input_time):
+#Trygve
+    def case_2(self):
+        n_time = time.time()
+        time_limit = 30
+        while(time.time()-n_time <= time_limit):
+            obj.rotateMotors(200,0)
+            obj.rotatePlate(200)
+        obj.stopMotors()   
+        return True
+
+#Marcus
+    def case_3(self):
+        n_time = time.time()
+        time_limit = 20
+        while(time.time()-n_time <= time_limit + 10):
+            obj.rotateMotors(1560,0)
+            obj.rotatePlate(700)
+            while(time.time() - n_time <= time_limit):
+                obj.rotateMotors(1200,0)
+                obj.rotatePlate(1500)
+            
+        obj.stopMotors()    
+        return True
+
+#Henrik
+    def case_4(self):
+        n_time = time.time()
+        time_limit = 15
+        while(time.time()-n_time <= time_limit):
+            while(time.time() - n_time<=7):
+                obj.rotateMotors(200,50)
+                obj.rotatePlate(150)
+            while(time.time()- n_time <= 15):
+                obj.rotateMotors(-100, -200)
+                obj.rotatePlate(-150)
+        obj.stopMotors()    
+        return True
+
+#Martin
+    def case_5(self):
+        n_time = time.time()
+        time_limit = 15
+        while(time.time()-n_time <= time_limit + 3):
+            wait(100)
+            obj.rotateMotors(0,45)
+            obj.rotatePlate(500)
+            while(time.time()-n_time <= time_limit):
+                obj.rotateMotors(1000,0)
+                obj.rotatePlate(1200)
+        obj.stopMotors()    
+        return True
       
 
     def switch(self, i):
@@ -46,16 +100,21 @@ class Robot:
     
 
     def main(self):
-        nr = 0
+        nr = 1
         while(True):
             ev3.screen.print(nr)
-            ev3.speaker.say(nr)
             if(self.touch_left.pressed()):
-                wait(2000)
+                wait(500)
                 nr+=1
+                if(nr>5):
+                    nr=1
             if(self.touch_right.pressed()):
+                wait(500)
                 obj.switch(nr)
-
+                nr+=1
+                if(nr>5):
+                    nr=1
+                
 
 ev3 = EV3Brick()
 obj = Robot()
