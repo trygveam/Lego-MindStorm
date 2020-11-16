@@ -31,7 +31,6 @@ class Robot:
         self.motor_2.stop()
         self.motor_plate.stop()
 
-#Maiken
     def case_1(self):
         n_time = time.time()
         time_limit = 20
@@ -41,7 +40,6 @@ class Robot:
         obj.stopMotors()    
         return True
 
-#Trygve
     def case_2(self):
         n_time = time.time()
         time_limit = 30
@@ -51,7 +49,6 @@ class Robot:
         obj.stopMotors()   
         return True
 
-#Marcus
     def case_3(self):
         n_time = time.time()
         time_limit = 20
@@ -64,8 +61,7 @@ class Robot:
             
         obj.stopMotors()    
         return True
-
-#Henrik
+      
     def case_4(self):
         n_time = time.time()
         time_limit = 15
@@ -79,7 +75,6 @@ class Robot:
         obj.stopMotors()    
         return True
 
-#Martin
     def case_5(self):
         n_time = time.time()
         time_limit = 15
